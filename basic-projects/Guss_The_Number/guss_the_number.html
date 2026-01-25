@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess The Number</title>
+  <style>
+    :root {
+      --primary: #DDD0C8;
+      --bg-dark: #323232;
+      --card-bg: #323232;
+      --text: #DDD0C8;
+      --success: #DDD0C8;
+      --error:#DDD0C8;
+      --warning: #DDD0C8;
+    }
+
+    * {
+         margin: 0; 
+         padding: 0; 
+         box-sizing: border-box; 
+         font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: radial-gradient(circle at center, #DDD0C8 0%, #323232 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background-color: var(--primary);
+      color: black;
+      padding: 10px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 15px #323232;
+    }
+
+    .container { flex: 1; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        width: 100%; 
+        padding: 20px; }
+
+    .box {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #fff, #DDD0C8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+
+    .rules { 
+        text-align: left;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 15px; border-radius: 12px; 
+        margin-bottom: 25px; 
+        font-size: 0.85rem; 
+        border-left: 4px solid var(--primary); 
+    }
+    .rules ul { 
+        list-style: none; 
+    }
+    .rules li { 
+        margin-bottom: 5px; 
+        opacity: 0.8;
+    }
+    .rules .rule-head { 
+        font-weight: bold; 
+        opacity: 1; 
+        color: var(--primary); 
+    
+    }
+
+    .random { 
+        background: rgba(255, 255, 255, 0.1); 
+        padding: 20px; 
+        border-radius: 15px; 
+        margin-bottom: 25px; 
+        border: 1px dashed rgba(255, 255, 255, 0.3); 
+    }
+    .random h2 { font-size: 1.2rem; letter-spacing: 4px; opacity: 0.7; }
+
+    input[type="number"] {
+      width: 100%; 
+      padding: 15px; 
+      border-radius: 12px; 
+      border: none;
+      background: white; 
+      color: #333; 
+      font-size: 1.1rem; 
+      font-weight: 600;
+      text-align: center; 
+      outline: none; 
+      transition: 0.3s;
+    }
+    input:focus { 
+        
+        box-shadow: 0 0 20px rgba(92, 92, 92, 0.5); 
+        
+        transform: scale(1.02); 
+    
+    }
+
+    button {
+      margin-top: 20px; 
+      width: 48%; 
+      padding: 15px;
+      border: none; 
+      border-radius: 12px;
+      background: var(--primary); 
+      color: black; 
+      font-weight: bold; 
+      font-size: 1rem;
+      cursor: pointer; 
+      transition: 0.3s;
+    }
+    button:hover { 
+        transform: translateY(-3px); 
+        box-shadow: 0 10px 20px #323232; }
+
+    .btn-group { 
+        display: flex; 
+        justify-content: space-between; 
+        gap: 10px; }
+
+    .leftchances { 
+        margin-top: 20px; 
+        background: rgba(255,255,255,0.1); 
+        border-radius: 10px; 
+        padding: 10px; 
+    }
+    .leftchances h5 { 
+        font-size: 45px; 
+        font-weight: bold; 
+    }
+
+    .stats { 
+        margin-top: 30px; 
+        display: flex; 
+        justify-content: center; 
+        gap: 20px; }
+    .stat-box { 
+        background: rgba(255, 255, 255, 0.05); 
+        padding: 10px 20px; 
+        border-radius: 12px; }
+    .stat-box p { 
+        font-size: 0.7rem; 
+        text-transform: uppercase; 
+        opacity: 0.6; }
+    .stat-box span { 
+        font-size: 1.5rem; 
+        font-weight: bold; 
+        color: var(--primary); }
+
+    .success { 
+        color: var(--success); 
+        font-weight: bold; }
+    .error { 
+        color: var(--error); 
+        font-weight: bold;
+     }
+    .warning { 
+        color: var(--warning); 
+        font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header><p>This side belongs to lucifer</p></header>
+  <div class="container">
+    <div class="box">
+      <h1>WELCOME TO GUESS THE NUMBER GAME</h1>
+      <div class="rules">
+        <ul>
+          <li class="rule-head">Rules</li>
+          <li>> You have 10 chances</li>
+          <li>> The secret number is between 1-100</li>
+          <li>> Only numbers are valid input</li>
+        </ul>
+      </div>
+      <div class="random">
+        <h2 id="h1">SECRET NUMBER</h2>
+      </div>
+      <div class="input">
+        <input id="number" type="number" placeholder="Enter your number here">
+      </div>
+      <div class="btn-group">
+        <button id="bt">Submit</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div class="leftchances">
+        <p>Chances Left</p>
+        <h5 id="chances">10</h5>
+      </div>
+      <div class="stats">
+        <div class="stat-box"><p>Wins</p><span id="wins">0</span></div>
+        <div class="stat-box"><p>Losses</p><span id="losses">0</span></div>
+      </div>
+    </div>
+  </div>
+<script>
+  let secret_number, chances, wins = 0, losses = 0;
+
+  function initGame() {
+    secret_number = Math.floor(Math.random() * 100 + 1);
+    chances = 10;
+    document.getElementById("chances").innerText = chances;
+    document.getElementById("h1").innerText = "SECRET NUMBER";
+    document.getElementById("bt").disabled = false;
+    document.getElementById("number").disabled = false;
+    document.getElementById("number").value = "";
+    console.log(secret_number);
+    
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    let input = document.getElementById("number");
+    let btt = document.getElementById("bt");
+    let resetBtn = document.getElementById("reset");
+    let message = document.getElementById("h1");
+    let chancesDisplay = document.getElementById("chances");
+
+    initGame();
+
+    btt.addEventListener("click", () => {
+      let guess = parseInt(input.value);
+
+      if (isNaN(guess)) {
+        message.innerHTML = "<span class='error'>Please enter a valid number!</span>";
+        return;
+      }
+
+      chances--;
+      chancesDisplay.innerText = chances;
+
+      if (guess < secret_number) {
+        message.innerHTML = `<span class='warning'>TRY HIGHER THAN ${guess}</span>`;
+      } else if (guess > secret_number) {
+        message.innerHTML = `<span class='warning'>TRY LOWER THAN ${guess}</span>`;
+      } else {
+        message.innerHTML = `<span class='success'>CORRECT 🎉 The number was ${secret_number} In ${10-chances} Chances</span>`;
+        wins++;
+        document.getElementById("wins").innerText = wins;
+        btt.disabled = true;
+        input.disabled = true;
+        return;
+      }
+
+      if (chances === 0 && guess !== secret_number) {
+        message.innerHTML = `<span class='error'>GAME OVER! The number was ${secret_number}</span>`;
+        losses++;
+        document.getElementById("losses").innerText = losses;
+        btt.disabled = true;
+        input.disabled = true;
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      initGame();
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 BOX colour</title>
+    <style>
+        .container {
+            height: 100px;
+            width: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            border-radius: 50px;
+        }
+
+        .box {
+            height: 50px;
+            width: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            border-radius: 6px;
+        }
+        .butt{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin-top: 50px;
+        }
+        button{
+            height: 50px;
+            width: 90px;
+            background-color: transparent;
+            border: 2px solid darkgrey;
+            border-radius: 40px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="box">BOX 1</div>
+        <div class="box">BOX 2</div>
+        <div class="box">BOX 3</div>
+        <div class="box">BOX 4</div>
+        <div class="box">BOX 5</div>
+    </div>
+    <div class="butt">
+
+        <button id="start">START</button>
+        <button id="stop">STOP</button>
+    </div>
+
+    <script>
+        const boxes = document.querySelectorAll('.box');
+        const container = document.getElementById('container');
+        const start = document.getElementById('start');
+        const stop = document.getElementById('stop');
+        const body = document.querySelector('body');
+
+        function random_color() {
+            let r = Math.floor(Math.random() * 255 + 1);
+            let g = Math.floor(Math.random() * 255 + 1);
+            let b = Math.floor(Math.random() * 255 + 1);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+            let inte;
+        start.addEventListener("click", function () {
+
+            {
+                inte=setInterval(() => {
+
+                    boxes.forEach(box => {
+                        box.style.backgroundColor = random_color();
+                    });
+
+                    container.style.backgroundColor = random_color();
+                    body.style.backgroundColor = random_color();
+                }, 1000);
+            }
+        }
+        )
+        stop.addEventListener("click",function stopit() {
+            clearInterval(inte)
+            start.disabled=false; 
+        })
+
+
+    </script>
+</body>
+
+</html>
