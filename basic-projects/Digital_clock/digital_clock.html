@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLOCK</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Ubuntu", sans-serif;
+        }
+
+        header {
+            width: 100%;
+            background-image: linear-gradient(to right, hsla(0, 0%, 100%, 0.871), #000000b7);
+            color: rgb(255, 255, 255);
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: clamp(16px, 4vw, 20px);
+            box-shadow: 0 4px 15px #323232;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(45deg, #08001f, #30197d);
+            color: #fff;
+            position: relative;
+        }
+
+        .box {
+            width: 750px;
+            height: 180px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            backdrop-filter: blur(40px);
+
+
+        }
+
+        .clock {
+            width: 100%;
+            height: 100%;
+            background: rgba(235, 0, 255, 0.11);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+
+        .redbox {
+            content: '';
+            width: 180px;
+            height: 180px;
+            position: absolute;
+            background: #f41b75;
+            border-radius: 5px;
+            top: 180px;
+            left: 290px;
+
+
+        }
+
+        .bluecircle {
+            content: '';
+            width: 180px;
+            height: 180px;
+            position: absolute;
+            background: #419aff;
+            border-radius: 50%;
+            bottom: 180px;
+            right: 290px;
+
+
+        }
+
+        .clock span {
+            font-size: 80px;
+            width: 110px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+
+        .clock span::after {
+            font-size: 16px;
+            width: 110px;
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #hrs::after {
+            content: 'HOURS';
+        }
+
+        #min::after {
+            content: 'MINUTES';
+        }
+
+        #sec::after {
+            content: 'SECONDS';
+        }
+
+        #ampm {
+            font-size: 40px;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                height: 88vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <p>This side belongs to lucifer</p>
+        </header>
+        <div class="redbox"></div>
+        <div class="bluecircle"></div>
+        <div class="box">
+            <div class="clock">
+                <span id="hrs">00</span>
+                <span>:</span>
+                <span id="min">00</span>
+                <span>:</span>
+                <span id="sec">00</span>
+            </div>
+            <span id="ampm"></span>
+        </div>
+    </div>
+
+    <script>
+        let hrs = document.getElementById("hrs");
+        let min = document.getElementById("min");
+        let sec = document.getElementById("sec");
+        let ampm = document.getElementById("ampm");
+        setInterval(() => {
+            let time = new Date();
+            let hours24 = time.getHours();
+            const hours12 = hours24 % 12 || 12;
+            hrs.innerText = hours12;
+            if (hours24 > 12) {
+                ampm.innerText = "PM";
+            } else {
+                ampm.innerText = "AM";
+            }
+
+            min.innerText = time.getMinutes();
+            sec.innerText = time.getSeconds();
+        }, 1000);
+
+    </script>
+
+
+
+
+</body>
+
+</html>
